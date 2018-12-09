@@ -8,10 +8,5 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   constructor(private dailtTaskApi: DataService, private http: HttpClient) {}
-  responsedata: any;
-  getUser = () => {
-    this.dailtTaskApi.testService().then((res) => {
-      this.responsedata = res[0].userID;
-    });
-  }
+  
 }

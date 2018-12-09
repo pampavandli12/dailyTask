@@ -12,11 +12,11 @@ export class DataService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  testService() {
+  signIn(data: any) {
     const promise = new Promise((resolve, reject) => {
       console.log('Service called');
-      const apiURL = 'http://localhost:3000/api/users';
-      this._http.post(apiURL, this.httpOptions)
+      const apiURL = 'http://localhost:3000/api/signin';
+      this._http.post(apiURL, data, this.httpOptions)
         .toPromise()
         .then(
           res => {

@@ -1,3 +1,32 @@
-<p>
-  signin works!
-</p>
+<div class="d-flex flex-column align-items-center justify-content-center containersize">
+    <img src="./assets/images/logo.svg" alt="Logo" width="72" height="72">
+    <h3>Please signin</h3>
+    <form class="signinform" [formGroup]="signinform" (ngSubmit)="onSubmit()" > 
+        <div class="form-group">
+          <input type="email" class="form-control" formControlName="email" name="email" placeholder="Enter Email">
+          <div *ngIf="!signinform.controls['email'].valid && signinform.controls['email'].touched" class="err-msg">
+            <div *ngIf="signinform.controls['email'].errors.required">
+                Email is <strong>required</strong>
+            </div>
+            <div *ngIf="signinform.controls['email'].errors.pattern">
+                Email is <strong>invalid</strong>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <input type="password" class="form-control" formControlName="password" name="password" placeholder="Enter Password">
+          <div *ngIf="!signinform.controls['password'].valid && signinform.controls['password'].touched" class="err-msg">
+            <div *ngIf="signinform.controls['password'].errors.required">
+                Password is <strong>required</strong>
+            </div>
+            <div *ngIf="signinform.controls['password'].errors.minlength">
+                Password should be min <strong>6 chanrecter</strong>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg submitbtn">Signin</button> 
+        <div class="alert alert-warning mt-2" role="alert" *ngIf="errorDiv">
+            {{errmsg}}
+        </div>
+    </form>
+</div>
