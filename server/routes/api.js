@@ -33,7 +33,7 @@ router.all('/signin', (req, res) => {
         if (results.length > 0) { 
             console.log(results[0].username);
             if (results[0].password === password.toUpperCase()) { 
-                var data = {username:results[0].username,message:'Success',status:1};
+                var data = {userID:results[0].userID,username:results[0].username,message:'Success',status:1};
                 res.send(data);
             } else {
                 res.send({message:'Password is incorrect',status:0})

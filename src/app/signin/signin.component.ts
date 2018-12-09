@@ -29,8 +29,7 @@ export class SigninComponent implements OnInit {
         console.log(res);
         if (res.status == 1) {
           alert('success');
-         // localStorage.setItem('username', res.result[0].username);
-          //localStorage.getItem('username'); 
+          localStorage.setItem('username', res.username);
         } else {
           this.errorDiv = true; 
           this.errmsg = res.message;
