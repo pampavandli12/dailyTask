@@ -26,9 +26,10 @@ app.get('*', (req, res) => {
 });
 
 //Set Port
-const port = process.env.PORT || '3000';
+/* const port = process.env.PORT || '3000';
 app.set('port', port);
 
 const server = http.createServer(app);
 
-server.listen(port, () => console.log(`Running on localhost:${port}`));
+server.listen(port, () => console.log(`Running on localhost:${port}`)); */
+app.listen(3000, () => console.log('server started at port 3000') )

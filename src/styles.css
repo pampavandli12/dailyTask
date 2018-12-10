@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Lato');
 body {
     background: #f5f5f5;
+    font-family: 'Lato', sans-serif !important;
 }
 .err-msg {
     color: red;

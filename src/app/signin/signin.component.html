@@ -25,8 +25,12 @@
           </div>
         </div>
         <button type="submit" class="btn btn-primary btn-lg submitbtn">Signin</button> 
+        <div class="d-flex justify-content-center align-items-center">
+            <small class="form-text text-muted smalllinks" (click)="signuplink()" >SignUp</small> &nbsp; <small>|</small>&nbsp; <small class="form-text text-muted smalllinks" (click)="forgotpasswordlink()" >Forgot Password</small>
+        </div>
         <div class="alert alert-warning mt-2" role="alert" *ngIf="errorDiv">
             {{errmsg}}
         </div>
+        <p class="mt-5 mb-3 text-muted center-align">© 2017-2018</p>
     </form>
 </div>

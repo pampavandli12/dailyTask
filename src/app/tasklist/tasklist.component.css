@@ -1,0 +1,15 @@
+.brandcolor {
+    color: aliceblue
+}
+.boldusername {
+    font-weight: bold;
+    color: blueviolet !important;
+}
+.cardpadding {
+    padding: 0px !important;
+    font-size: 14px;
+    color: #4a4545;
+}
+.smallfont {
+    font-size: 12px;
+}

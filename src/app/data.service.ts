@@ -26,4 +26,15 @@ export class DataService {
     });
     return promise;
   }
+  signup(data: any) {
+    console.log(data);
+    return new Promise((resolve, reject) => {
+      const apiURL = 'http://localhost:3000/api/signup';
+      this._http.post(apiURL, data, this.httpOptions)
+      .toPromise()
+      .then(res => {
+        resolve(res);
+      });
+    });
+  }
 }

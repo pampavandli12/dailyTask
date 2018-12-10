@@ -1,0 +1,50 @@
+<div class="d-flex flex-column align-items-center justify-content-center containersize">
+  <img src="./assets/images/logo.svg" alt="Logo" width="72" height="72">
+  <h3>Please signup</h3>
+  <form class="signupform" [formGroup]="signupform" (ngSubmit)="onSubmit()" > 
+      <div class="form-group">
+          <input type="text" class="form-control" formControlName="username" name="username" placeholder="Enter Username">
+          <div *ngIf="!signupform.controls['username'].valid && signupform.controls['username'].touched" class="err-msg">
+            <div *ngIf="signupform.controls['username'].errors.required">
+                Username is <strong>required</strong>
+            </div>
+            <div *ngIf="signupform.controls['username'].errors.pattern">
+                Username is <strong>invalid</strong>
+            </div>
+          </div>
+        </div>
+      <div class="form-group">
+        <input type="email" class="form-control" formControlName="email" name="email" placeholder="Enter Email">
+        <div *ngIf="!signupform.controls['email'].valid && signupform.controls['email'].touched" class="err-msg">
+          <div *ngIf="signupform.controls['email'].errors.required">
+              Email is <strong>required</strong>
+          </div>
+          <div *ngIf="signupform.controls['email'].errors.pattern">
+              Email is <strong>invalid</strong>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" formControlName="password" name="password" placeholder="Enter Password">
+        <div *ngIf="!signupform.controls['password'].valid && signupform.controls['password'].touched" class="err-msg">
+          <div *ngIf="signupform.controls['password'].errors.required">
+              Password is <strong>required</strong>
+          </div>
+          <div *ngIf="signupform.controls['password'].errors.minlength">
+              Password should be min <strong>6 chanrecter</strong>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-lg submitbtn">Signup</button> 
+      <div class="d-flex justify-content-center align-items-center">
+          <small class="form-text text-muted" >Already have an account ?</small> &nbsp; <small class="form-text text-muted smalllinks" (click)="signinlink()" >SignIn</small> 
+      </div>
+      <div class="alert alert-primary mt-2" *ngIf="successdiv" role="alert">
+          {{successmsg}}
+      </div>
+      <div class="alert alert-warning mt-2" role="alert" *ngIf="errorDiv">
+          {{errmsg}}
+      </div>
+      <p class="mt-5 mb-3 text-muted center-align">© 2017-2018</p>
+  </form>
+</div>
