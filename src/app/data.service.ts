@@ -37,4 +37,34 @@ export class DataService {
       });
     });
   }
+  addNewTask(data: any) {
+    return new Promise((resolve, reject) => {
+      const apiURL = 'http://localhost:3000/api/addTask';
+      this._http.post(apiURL, data, this.httpOptions)
+      .toPromise()
+      .then(res => {
+        resolve(res);
+      });
+    });
+  }
+  getTaskList() {
+    return new Promise((resolve, reject) => {
+      const apiURL = 'http://localhost:3000/api/getTaskList';
+      this._http.post(apiURL, this.httpOptions)
+      .toPromise()
+      .then(res => {
+        resolve(res);
+      });
+    });
+  }
+  editTaskList(data: any) {
+    return new Promise((resolve, reject) => {
+      const apiURL = 'http://localhost:3000/api/editTaskList';
+      this._http.post(apiURL, data, this.httpOptions)
+      .toPromise()
+      .then(res => {
+        resolve(res);
+      })
+    });
+  }
 }

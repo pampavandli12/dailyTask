@@ -20,6 +20,9 @@ export class SignupComponent implements OnInit {
   successdiv = false;
   successmsg = '';
   ngOnInit() {
+    if (localStorage.getItem('username')) {
+      this.router.navigateByUrl('/tasklist');
+    }
     this.signupform = this.fb.group({
       username: ['', [Validators.required, Validators.pattern(this.usernamepattern)]],
       email : ['', [Validators.required, Validators.pattern(this.emailPattern)]],

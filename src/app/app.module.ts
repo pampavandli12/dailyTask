@@ -9,13 +9,15 @@ import { DataService } from './data.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './signup/signup.component';
 import { TasklistComponent } from './tasklist/tasklist.component';
+import { AddoreditcomponentComponent } from './addoreditcomponent/addoreditcomponent.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SigninComponent,
     SignupComponent,
-    TasklistComponent
+    TasklistComponent,
+    AddoreditcomponentComponent
   ],
   imports: [
     BrowserModule,

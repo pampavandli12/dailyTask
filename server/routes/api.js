@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const ObjectID = require('mongodb').ObjectID;
 const users = require('../models/users');
+const tasklist = require('../models/tasklist');
 var md5 = require('md5');
 
 // Connect
@@ -64,6 +65,49 @@ router.all('/signup',(req, res) => {
                     }
                 })
             }
+        }
+    })
+});
+//Add New Task
+router.all('/addTask', (req, res) => {
+    const userID = req.body.userID;
+    const username = req.body.username;
+    const headline = req.body.headline;
+    const description = req.body.description;
+    const date = req.body.date;
+    tasklist.create({username:username,userID:userID,headline:headline,description:description,date:date},(err, results) => {
+        if (err) {
+            return condole.log(err);
+        } else {
+            res.send({status:1,message:'Successfully added'});
+        }
+    })
+});
+
+//Get Task List
+router.all('/getTaskList', (req, res) => {
+    tasklist.find({},(err, results) => {
+        if (err) {
+            return console.log(err);
+        } else {
+            res.send({status:1, data:results});
+        }
+    })
+});
+
+//Edit Task List
+router.all('/editTaskList', (req, res) => {
+    const userID = req.body.userID;
+    const username = req.body.username;
+    const headline = req.body.headline;
+    const description = req.body.description;
+    const date = req.body.date;
+    const id = req.body.id;
+    tasklist.update({_id:ObjectID(id)},{username:username,userID:userID,headline:headline,description:description,date:date}, (err, results) => {
+        if (err) {
+            return console.log(err);
+        } else {
+            res.send({status:1,message:'Successfully Updated'});
         }
     })
 })
