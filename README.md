@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## MongoDB
 
-Instal mongodb and the mongo server
+Instal mongodb and run the server
 
 ## Node server
 
