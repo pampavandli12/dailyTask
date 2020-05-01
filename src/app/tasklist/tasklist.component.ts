@@ -1,52 +1,48 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { DataService } from '../data.service';
+import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
+import { DataService } from "../data.service";
+import { Store, select } from "@ngrx/store";
+import * as AppStore from "../store/reducer/reducer";
 declare var moment: any;
+import * as AllActions from "../store/actions/actions";
 
 @Component({
-  selector: 'app-tasklist',
-  templateUrl: './tasklist.component.html',
-  styleUrls: ['./tasklist.component.css']
+  selector: "app-tasklist",
+  templateUrl: "./tasklist.component.html",
+  styleUrls: ["./tasklist.component.css"],
 })
 export class TasklistComponent implements OnInit {
-
-  constructor(private router: Router, private dailtTaskApi: DataService) { }
+  constructor(
+    private router: Router,
+    private dailtTaskApi: DataService,
+    private store: Store
+  ) {}
   IsTaskList = true;
   taskList: any;
   tasklistdata: any;
   ngOnInit() {
-    if (!localStorage.getItem('username')) {
-      this.router.navigateByUrl('/signin');
-    }
-    this.dailtTaskApi.getTaskList().then((res) => {
-      const results = (res as any);
-      if (results.status === 1) {
-        this.taskList = results.data;
-      } else {
-        console.log('error occured');
+    this.store.pipe(select(AppStore.getTaskListState)).subscribe((taskList) => {
+      this.taskList = taskList;
+    });
+    this.store.pipe(select(AppStore.getTokenState)).subscribe((token) => {
+      if (!token) {
+        this.router.navigateByUrl("/signin");
       }
     });
+    this.store.dispatch(new AllActions.SetTaskList());
   }
   AddNewTask = () => {
     this.IsTaskList = false;
-  }
+  };
   EditTaskList = (data) => {
     this.IsTaskList = false;
     this.tasklistdata = data;
-  }
+  };
   closeChild = () => {
-   this.IsTaskList = true;
-   this.dailtTaskApi.getTaskList().then((res) => {
-    const results = (res as any);
-    if (results.status === 1) {
-      this.taskList = results.data;
-    } else {
-      console.log('error occured');
-    }
-  });
-  }
+    this.IsTaskList = true;
+  };
   Logout = () => {
     localStorage.clear();
-    this.router.navigateByUrl('/signin');
-  }
+    this.store.dispatch(new AllActions.Logout());
+  };
 }

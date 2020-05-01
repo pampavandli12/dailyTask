@@ -1,76 +1,138 @@
-<div class="d-flex flex-column align-items-center justify-content-center containersize">
-    <img src="./assets/images/logo.svg" alt="Logo" width="72" height="72">
-    <h3>Please signin</h3>
-    <form class="signinform" [formGroup]="signinform" (ngSubmit)="onSubmit()" > 
-        <div class="form-group">
-          <input type="email" class="form-control" formControlName="email" name="email" placeholder="Enter Email">
-          <div *ngIf="!signinform.controls['email'].valid && signinform.controls['email'].touched" class="err-msg">
-            <div *ngIf="signinform.controls['email'].errors.required">
-                Email is <strong>required</strong>
-            </div>
-            <div *ngIf="signinform.controls['email'].errors.pattern">
-                Email is <strong>invalid</strong>
-            </div>
-          </div>
+<div
+  class="d-flex flex-column align-items-center justify-content-center containersize"
+>
+  <img src="./assets/images/logo.svg" alt="Logo" width="72" height="72" />
+  <h3>Please signin</h3>
+  <form class="signinform" [formGroup]="signinform" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <input
+        type="email"
+        class="form-control"
+        formControlName="email"
+        name="email"
+        placeholder="Enter Email"
+      />
+      <div
+        *ngIf="
+          !signinform.controls['email'].valid &&
+          signinform.controls['email'].touched
+        "
+        class="err-msg"
+      >
+        <div *ngIf="signinform.controls['email'].errors.required">
+          Email is <strong>required</strong>
         </div>
-        <div class="form-group">
-          <input type="password" class="form-control" formControlName="password" name="password" placeholder="Enter Password">
-          <div *ngIf="!signinform.controls['password'].valid && signinform.controls['password'].touched" class="err-msg">
-            <div *ngIf="signinform.controls['password'].errors.required">
-                Password is <strong>required</strong>
-            </div>
-            <div *ngIf="signinform.controls['password'].errors.minlength">
-                Password should be min <strong>6 chanrecter</strong>
-            </div>
-          </div>
+        <div *ngIf="signinform.controls['email'].errors.pattern">
+          Email is <strong>invalid</strong>
         </div>
-        <button type="submit" class="btn btn-primary btn-lg submitbtn">Signin</button> 
-        <div class="d-flex justify-content-center align-items-center">
-            <small class="form-text text-muted smalllinks" (click)="signuplink()" >SignUp</small> &nbsp; <small>|</small>&nbsp; <small class="form-text text-muted smalllinks" (click)="forgotpasswordlink()" >Forgot Password</small>
+      </div>
+    </div>
+    <div class="form-group">
+      <input
+        type="password"
+        class="form-control"
+        formControlName="password"
+        name="password"
+        placeholder="Enter Password"
+      />
+      <div
+        *ngIf="
+          !signinform.controls['password'].valid &&
+          signinform.controls['password'].touched
+        "
+        class="err-msg"
+      >
+        <div *ngIf="signinform.controls['password'].errors.required">
+          Password is <strong>required</strong>
         </div>
-        <div class="alert alert-warning mt-2" role="alert" *ngIf="errorDiv">
-            {{errmsg}}
+        <div *ngIf="signinform.controls['password'].errors.minlength">
+          Password should be min <strong>6 chanrecter</strong>
         </div>
-        <p class="mt-5 mb-3 text-muted center-align">© 2017-2018</p>
-    </form>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg submitbtn">
+      Signin
+    </button>
+    <div class="d-flex justify-content-center align-items-center">
+      <small class="form-text text-muted smalllinks" (click)="signuplink()"
+        >SignUp</small
+      >
+      &nbsp; <small>|</small>&nbsp;
+      <small
+        class="form-text text-muted smalllinks"
+        (click)="forgotpasswordlink()"
+        >Forgot Password</small
+      >
+    </div>
+    <div class="alert alert-warning mt-2" role="alert" *ngIf="errorDiv">
+      {{ errmsg }}
+    </div>
+    <p class="mt-5 mb-3 text-muted center-align">© 2020-2021</p>
+  </form>
 </div>
 
 <!-- Forgot Password Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalCenterTitle">Forgot Password</h5>
-            <button type="button" class="close" (click)="closeModal()" >
-            <span aria-hidden="true">&times;</span>
+<div
+  class="modal fade"
+  id="exampleModalCenter"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">
+          Forgot Password
+        </h5>
+        <button type="button" class="close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="resetPassword" (ngSubmit)="onReset()">
+          <div class="form-group">
+            <input
+              type="email"
+              class="form-control"
+              formControlName="resetEmail"
+              placeholder="Enter Email"
+            />
+            <div
+              *ngIf="
+                !resetPassword.controls['resetEmail'].valid &&
+                resetPassword.controls['resetEmail'].touched
+              "
+              class="err-msg"
+            >
+              <div *ngIf="resetPassword.controls['resetEmail'].errors.required">
+                Email is <strong>required</strong>
+              </div>
+              <div *ngIf="resetPassword.controls['resetEmail'].errors.pattern">
+                Email is <strong>invalid</strong>
+              </div>
+            </div>
+          </div>
+          <div class="alert alert-primary" *ngIf="successrstdiv" role="alert">
+            {{ successrstmsg }}
+          </div>
+          <div class="alert alert-warning" *ngIf="failrstdiv" role="alert">
+            {{ failrstmsg }}
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="closeModal()"
+            >
+              Close
             </button>
-        </div>
-        <div class="modal-body">
-            <form [formGroup]="resetPassword" (ngSubmit)="onReset()">
-                <div class="form-group">
-                  <input type="email" class="form-control" formControlName="resetEmail" placeholder="Enter Email">
-                  <div *ngIf="!resetPassword.controls['resetEmail'].valid && resetPassword.controls['resetEmail'].touched" class="err-msg">
-                    <div *ngIf="resetPassword.controls['resetEmail'].errors.required">
-                        Email is <strong>required</strong>
-                    </div>
-                    <div *ngIf="resetPassword.controls['resetEmail'].errors.pattern">
-                            Email is <strong>invalid</strong>
-                    </div>
-                  </div>
-                </div>
-                <div class="alert alert-primary" *ngIf="successrstdiv" role="alert">
-                    {{successrstmsg}}
-                </div>
-                <div class="alert alert-warning" *ngIf="failrstdiv" role="alert">
-                    {{failrstmsg}}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </form>
-        </div>
-        </div>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
     </div>
+  </div>
 </div>
 <!-- //Forgot Password Modal -->
