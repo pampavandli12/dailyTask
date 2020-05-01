@@ -28,21 +28,21 @@ export class DataService {
     const apiURL = "http://localhost:3000/api/addTask";
     let httpOptions = new HttpHeaders()
       .set("content-type", "application/json")
-      .set("Autherization", `Bearer ${this.token}`);
+      .set("Authorization", `Bearer ${this.token}`);
     return this._http.post(apiURL, data, { headers: httpOptions });
   }
   getTaskList() {
     const apiURL = "http://localhost:3000/api/getTaskList";
     let httpOptions = new HttpHeaders()
       .set("content-type", "application/json")
-      .set("Autherization", `Bearer ${this.token}`);
+      .set("Authorization", `Bearer ${this.token}`);
     return this._http.get(apiURL, { headers: httpOptions });
   }
   editTaskList(data: any) {
     const apiURL = "http://localhost:3000/api/editTaskList";
     let httpOptions = new HttpHeaders()
       .set("content-type", "application/json")
-      .set("Autherization", `Bearer ${this.token}`);
+      .set("Authorization", `Bearer ${this.token}`);
     return this._http.put(apiURL, data, { headers: httpOptions });
   }
 }

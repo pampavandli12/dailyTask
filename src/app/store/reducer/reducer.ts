@@ -103,6 +103,7 @@ export const Reducer = (state = initialState, action): AppState => {
     case ActionTypes.SIGNIN_FAIL:
       return { ...state, loading: false, signinError: action.payload };
     case ActionTypes.LOGOUT:
+      localStorage.clear();
       return {
         token: null,
         taskList: [],

@@ -21,9 +21,13 @@ export class AppEffect {
       mergeMap(() =>
         this.appService.getTaskList().pipe(
           map((response) => new AppActions.SetTaskListSuccess(response.data)),
-          catchError((error) =>
-            of(new AppActions.SetTaskListFail(error.error.message))
-          )
+          catchError((error) => {
+            if (error.status == 403) {
+              return of(new AppActions.Logout());
+            } else {
+              return of(new AppActions.SetTaskListFail(error.error.message));
+            }
+          })
         )
       )
     )
@@ -35,9 +39,13 @@ export class AppEffect {
       mergeMap((action) =>
         this.appService.editTaskList(action.payload).pipe(
           map((res) => new AppActions.OnEditTaskSuccess(res.data)),
-          catchError((error) =>
-            of(new AppActions.OnEditTaskFail(error.error.message))
-          )
+          catchError((error) => {
+            if (error.status == 403) {
+              return of(new AppActions.Logout());
+            } else {
+              return of(new AppActions.OnEditTaskFail(error.error.message));
+            }
+          })
         )
       )
     )
@@ -68,9 +76,9 @@ export class AppEffect {
       mergeMap((action) =>
         this.appService.signup(action.payload).pipe(
           map((response) => {
-            localStorage.setItem("username", response.username);
-            localStorage.setItem("userID", response.userID);
-            return new AppActions.SignupSuccess("yegfjhsgfkyudg");
+            localStorage.setItem("username", response.data.username);
+            localStorage.setItem("userID", response.data.userID);
+            return new AppActions.SignupSuccess(response.token);
           }),
           catchError((error) =>
             of(new AppActions.SignupFail(error.error.message))
@@ -86,9 +94,13 @@ export class AppEffect {
       mergeMap((action) =>
         this.appService.addNewTask(action.payload).pipe(
           map((response) => new AppActions.OnAddTaskSuccess(response.data)),
-          catchError((error) =>
-            of(new AppActions.OnAddTaskFail(error.error.message))
-          )
+          catchError((error) => {
+            if (error.status == 403) {
+              return of(new AppActions.Logout());
+            } else {
+              return of(new AppActions.OnAddTaskFail(error.error.message));
+            }
+          })
         )
       )
     );
