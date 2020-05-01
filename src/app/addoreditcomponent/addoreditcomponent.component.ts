@@ -1,4 +1,11 @@
-import { Component, OnInit, EventEmitter, Input, Output } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  EventEmitter,
+  Input,
+  Output,
+  OnChanges,
+} from "@angular/core";
 import { DataService } from "../data.service";
 import { HttpClient } from "@angular/common/http";
 import {
@@ -18,14 +25,19 @@ import * as fromAllReducer from "../store/reducer/reducer";
   templateUrl: "./addoreditcomponent.component.html",
   styleUrls: ["./addoreditcomponent.component.css"],
 })
-export class AddoreditcomponentComponent implements OnInit {
+export class AddoreditcomponentComponent implements OnInit, OnChanges {
   constructor(
     private dailtTaskApi: DataService,
     private http: HttpClient,
     private fb: FormBuilder,
     private router: Router,
     private store: Store
-  ) {}
+  ) {
+    this.AddOrEditTaskForm = this.fb.group({
+      headline: ["", [Validators.required]],
+      description: ["", [Validators.required]],
+    });
+  }
   AddOrEditTaskForm: FormGroup;
   @Output() close: EventEmitter<any> = new EventEmitter();
   @Input() tasklistdata: any;
@@ -33,13 +45,8 @@ export class AddoreditcomponentComponent implements OnInit {
   successmsg = "";
   isEditTask = false;
   titletext = "";
-  ngOnInit() {
-    this.AddOrEditTaskForm = this.fb.group({
-      headline: ["", [Validators.required]],
-      description: ["", [Validators.required]],
-    });
+  ngOnChanges() {
     if (this.tasklistdata) {
-      this.isEditTask = true;
       this.titletext = "Edit";
       this.AddOrEditTaskForm.controls.headline.patchValue(
         this.tasklistdata.headline
@@ -47,11 +54,15 @@ export class AddoreditcomponentComponent implements OnInit {
       this.AddOrEditTaskForm.controls.description.patchValue(
         this.tasklistdata.description
       );
+      this.isEditTask = true;
     } else {
       this.titletext = "Add";
+      this.AddOrEditTaskForm.controls.headline.patchValue("");
+      this.AddOrEditTaskForm.controls.description.patchValue("");
       this.isEditTask = false;
     }
   }
+  ngOnInit() {}
   onSubmit = () => {
     if (this.AddOrEditTaskForm.valid) {
       const today = new Date();

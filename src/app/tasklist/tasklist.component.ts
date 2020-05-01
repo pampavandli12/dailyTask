@@ -32,6 +32,7 @@ export class TasklistComponent implements OnInit {
     this.store.dispatch(new AllActions.SetTaskList());
   }
   AddNewTask = () => {
+    this.tasklistdata = null;
     this.IsTaskList = false;
   };
   EditTaskList = (data) => {

@@ -1,34 +1,55 @@
 <!-- Image and text -->
 <nav class="navbar navbar-light bg-primary">
-    <a class="navbar-brand brandcolor" href="javascript:void(0)">
-      <img src="./assets/images/logo.svg" width="30" height="30" class="d-inline-block align-top" alt="">
-      Task Updator
-    </a>
-    <button type="button" class="btn btn-primary btn-sm" (click)="Logout()" >
-      Sign out&nbsp;<i class="fas fa-sign-out-alt"></i>
+  <a class="navbar-brand brandcolor" href="javascript:void(0)">
+    <img
+      src="./assets/images/logo.svg"
+      width="30"
+      height="30"
+      class="d-inline-block align-top"
+      alt=""
+    />
+    Task Updator
+  </a>
+  <button type="button" class="btn btn-primary btn-sm" (click)="Logout()">
+    Sign out&nbsp;<i class="fas fa-sign-out-alt"></i>
+  </button>
+</nav>
+<!-- Task list  -->
+<div *ngIf="IsTaskList">
+  <div class="d-flex justify-content-between align-items-center mt-2">
+    <h4 class="ml-2">All Tasks</h4>
+    <button type="button" class="btn btn-primary mr-2" (click)="AddNewTask()">
+      Add today's task
     </button>
-  </nav>
-  <!-- Task list  -->
-  <div *ngIf="IsTaskList">
-    <div class="d-flex justify-content-between align-items-center mt-2">
-      <h4 class="ml-2">All Tasks</h4>
-      <button type="button" class="btn btn-primary mr-2" (click)="AddNewTask()">Add today's task</button>
+  </div>
+  <div class="card text-left m-2 p-2" *ngFor="let data of taskList">
+    <div class="d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center">
+        <small class="form-text text-muted boldusername">{{
+          data.username
+        }}</small
+        >&nbsp;&nbsp;
+        <small class="form-text text-muted smallfont">{{ data.date }}</small>
+      </div>
+      <button
+        type="button"
+        class="btn btn-primary btn-sm"
+        (click)="EditTaskList(data)"
+      >
+        <i class="fas fa-pen-square"></i>&nbsp;Edit Task
+      </button>
     </div>
-    <div class="card text-left m-2 p-2" *ngFor="let data of taskList" >
-      <div class="d-flex align-items-center justify-content-between">
-        <div class="d-flex align-items-center">
-          <small class="form-text text-muted boldusername">{{data.username}}</small>&nbsp;&nbsp;
-          <small class="form-text text-muted smallfont">{{data.date}}</small>
-        </div>
-        <button type="button" class="btn btn-primary btn-sm" (click)="EditTaskList(data)" ><i class="fas fa-pen-square"></i>&nbsp;Edit Task</button>
-      </div>
-      <div class="card-body cardpadding">
-        <h4>{{data.headline}}</h4>
-          {{data.description}}
-      </div>
+    <div class="card-body cardpadding">
+      <h4>{{ data.headline }}</h4>
+      {{ data.description }}
     </div>
   </div>
+</div>
 <!-- //Task list -->
-  <!-- Add or edit component -->
-  <app-addoreditcomponent *ngIf="!IsTaskList" [tasklistdata]=tasklistdata (close)="closeChild()" ></app-addoreditcomponent>
-  <!-- //Add or edit component -->
+<!-- Add or edit component -->
+<app-addoreditcomponent
+  *ngIf="!IsTaskList"
+  [tasklistdata]="tasklistdata"
+  (close)="closeChild()"
+></app-addoreditcomponent>
+<!-- //Add or edit component -->
