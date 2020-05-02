@@ -2,14 +2,14 @@ import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { ActionTypes } from "../actions/actions";
 
 export interface AppState {
-  token: any;
+  token: string;
   taskList: any;
   selectedTask: any;
   isLogedIn: boolean;
   error: any;
   loading: boolean;
-  signinError: any;
-  signupError: any;
+  signinError: string;
+  signupError: string;
 }
 const initialState: AppState = {
   token: null,

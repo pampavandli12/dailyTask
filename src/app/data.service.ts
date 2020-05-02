@@ -8,7 +8,7 @@ import { map } from "rxjs/operators";
   providedIn: "root",
 })
 export class DataService {
-  token: null;
+  token: any = null;
   constructor(private _http: HttpClient, private store: Store) {
     this.store.pipe(select(AppStore.getTokenState)).subscribe((token) => {
       this.token = token;
