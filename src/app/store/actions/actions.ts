@@ -23,78 +23,78 @@ export enum ActionTypes {
   SIGNIN_FAIL = "SIGNIN_FAIL",
   LOGOUT = "LOGOUT",
   AUTO_CHECK_LOGIN = "AUTO_CHECK_LOGIN",
-  RESET_ERROR = 'RESET_ERROR';
+  RESET_ERROR = "RESET_ERROR",
 }
 
 export class SetToken implements Action {
   readonly type = ActionTypes.SET_TOKEN;
-  constructor(private payload: string) {}
+  constructor(public payload: string) {}
 }
 export class SetTaskList implements Action {
   readonly type = ActionTypes.SET_TASKLIST;
 }
 export class SetSelectedTask implements Action {
   readonly type = ActionTypes.SET_SELECTEDTASK;
-  constructor(private payload: any) {}
+  constructor(public payload: any) {}
 }
 export class SetTaskListSuccess implements Action {
   readonly type = ActionTypes.SET_TASKLIST_SUCCESS;
-  constructor(private payload: any) {}
+  constructor(public payload: any) {}
 }
 export class SetTaskListFail implements Action {
   readonly type = ActionTypes.SET_TASKLIST_FAIL;
-  constructor(private payload: any) {}
+  constructor(public payload: any) {}
 }
 export class OnEditTask implements Action {
   readonly type = ActionTypes.ON_EDIT_TASK;
-  constructor(private payload: any) {}
+  constructor(public payload: any) {}
 }
 export class OnEditTaskSuccess implements Action {
   readonly type = ActionTypes.ON_EDIT_TASK_SUCCESS;
-  constructor(private payload: any){}
+  constructor(public payload: any) {}
 }
 export class OnEditTaskFail implements Action {
   readonly type = ActionTypes.ON_EDIT_TASK_FAIL;
-  constructor(private payload: any) {}
+  constructor(public payload: any) {}
 }
 export class OnSignup implements Action {
   readonly type = ActionTypes.ON_SIGNUP;
-  constructor(private payload: any) {}
+  constructor(public payload: any) {}
 }
 export class SignupSuccess implements Action {
   readonly type = ActionTypes.SIGNUP_SUCCESS;
-  constructor(private payload: any) {}
+  constructor(public payload: any) {}
 }
 export class SignupFail implements Action {
   readonly type = ActionTypes.SIGNUP_FAIL;
-  constructor(private payload: any) {}
+  constructor(public payload: any) {}
 }
 export class OnSignin implements Action {
   readonly type = ActionTypes.ON_SIGNIN;
-  constructor(private payload: any) {}
+  constructor(public payload: any) {}
 }
 export class SigninSuccess implements Action {
   readonly type = ActionTypes.SIGNIN_SUCCESS;
-  constructor(private payload: any) {}
+  constructor(public payload: any) {}
 }
 export class SigninFail implements Action {
   readonly type = ActionTypes.SIGNIN_FAIL;
-  constructor(private payload: any) {}
+  constructor(public payload: any) {}
 }
 export class Logout implements Action {
   readonly type = ActionTypes.LOGOUT;
 }
 export class OnAddTask implements Action {
   readonly type = ActionTypes.ON_ADD_TASK;
-  constructor(private payload: any) {}
+  constructor(public payload: any) {}
 }
 export class OnAddTaskSuccess implements Action {
   readonly type = ActionTypes.ON_ADD_TASK_SUCCESS;
-  constructor(private payload: any) {}
+  constructor(public payload: any) {}
 }
 export class OnAddTaskFail implements Action {
   readonly type = ActionTypes.ON_ADD_TASK_FAIL;
-  constructor(private payload: any) {}
+  constructor(public payload: any) {}
 }
 export class AutoCheckLogin implements Action {
   readonly type = ActionTypes.AUTO_CHECK_LOGIN;
@@ -122,4 +122,4 @@ export type AllActions =
   | OnAddTaskSuccess
   | OnAddTaskFail
   | AutoCheckLogin
-  |ResetError;
+  | ResetError;

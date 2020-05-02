@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Store, select } from "@ngrx/store";
 import * as AppStore from "./store/reducer/reducer";
+import { map } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root",

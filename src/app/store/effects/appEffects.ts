@@ -4,7 +4,7 @@ import * as AppActions from "../actions/actions";
 import { DataService } from "src/app/data.service";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { EMPTY } from "rxjs";
-import { map, mergeMap, catchError } from "rxjs/operators";
+import { map, mergeMap, catchError, tap } from "rxjs/operators";
 import { Router } from "@angular/router";
 
 @Injectable()
@@ -20,14 +20,10 @@ export class AppEffect {
       ofType(AppActions.ActionTypes.SET_TASKLIST),
       mergeMap(() =>
         this.appService.getTaskList().pipe(
-          map((response) => new AppActions.SetTaskListSuccess(response.data)),
-          catchError((error) => {
-            if (error.status == 403) {
-              return of(new AppActions.Logout());
-            } else {
-              return of(new AppActions.SetTaskListFail(error.error.message));
-            }
-          })
+          map((res) => new AppActions.SetTaskListSuccess(res.data)),
+          catchError((error) =>
+            of(new AppActions.SetTaskListFail(error.error.message))
+          )
         )
       )
     )
@@ -36,16 +32,12 @@ export class AppEffect {
   editTask$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AppActions.ActionTypes.ON_EDIT_TASK),
-      mergeMap((action) =>
+      mergeMap((action: AppActions.OnEditTask) =>
         this.appService.editTaskList(action.payload).pipe(
           map((res) => new AppActions.OnEditTaskSuccess(res.data)),
-          catchError((error) => {
-            if (error.status == 403) {
-              return of(new AppActions.Logout());
-            } else {
-              return of(new AppActions.OnEditTaskFail(error.error.message));
-            }
-          })
+          catchError((error) =>
+            of(new AppActions.OnEditTaskFail(error.error.message))
+          )
         )
       )
     )
@@ -54,13 +46,13 @@ export class AppEffect {
   onSignIn$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AppActions.ActionTypes.ON_SIGNIN),
-      mergeMap((action) =>
+      mergeMap((action: AppActions.OnSignin) =>
         this.appService.signIn(action.payload).pipe(
-          map((response) => {
-            localStorage.setItem("username", response.data.username);
-            localStorage.setItem("userID", response.data.userID);
-            localStorage.setItem("token", response.token);
-            return new AppActions.SigninSuccess(response.token);
+          map((res) => {
+            localStorage.setItem("username", res.data.username);
+            localStorage.setItem("userID", res.data.userID);
+            localStorage.setItem("token", res.token);
+            return new AppActions.SigninSuccess(res.token);
           }),
           catchError((error) =>
             of(new AppActions.SigninFail(error.error.message))
@@ -73,12 +65,12 @@ export class AppEffect {
   onSignUp$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AppActions.ActionTypes.ON_SIGNUP),
-      mergeMap((action) =>
+      mergeMap((action: AppActions.OnSignup) =>
         this.appService.signup(action.payload).pipe(
-          map((response) => {
-            localStorage.setItem("username", response.data.username);
-            localStorage.setItem("userID", response.data.userID);
-            return new AppActions.SignupSuccess(response.token);
+          map((res) => {
+            localStorage.setItem("username", res.data.username);
+            localStorage.setItem("userID", res.data.userID);
+            return new AppActions.SignupSuccess(res.token);
           }),
           catchError((error) =>
             of(new AppActions.SignupFail(error.error.message))
@@ -91,16 +83,12 @@ export class AppEffect {
   addNewTask$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AppActions.ActionTypes.ON_ADD_TASK),
-      mergeMap((action) =>
+      mergeMap((action: AppActions.OnAddTask) =>
         this.appService.addNewTask(action.payload).pipe(
-          map((response) => new AppActions.OnAddTaskSuccess(response.data)),
-          catchError((error) => {
-            if (error.status == 403) {
-              return of(new AppActions.Logout());
-            } else {
-              return of(new AppActions.OnAddTaskFail(error.error.message));
-            }
-          })
+          map((res) => new AppActions.OnAddTaskSuccess(res.data)),
+          catchError((error) =>
+            of(new AppActions.OnAddTaskFail(error.error.message))
+          )
         )
       )
     );
