@@ -20,6 +20,7 @@ export class TasklistComponent implements OnInit {
   IsTaskList = true;
   taskList: any;
   tasklistdata: any;
+  loading = false;
   ngOnInit() {
     this.store.pipe(select(AppStore.getTaskListState)).subscribe((taskList) => {
       this.taskList = taskList;
@@ -30,6 +31,9 @@ export class TasklistComponent implements OnInit {
       }
     });
     this.store.dispatch(new AllActions.SetTaskList());
+    this.store.pipe(select(AppStore.getLoadingState)).subscribe((loading) => {
+      this.loading = loading;
+    });
   }
   AddNewTask = () => {
     this.tasklistdata = null;

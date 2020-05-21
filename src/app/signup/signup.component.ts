@@ -32,6 +32,7 @@ export class SignupComponent implements OnInit {
   errmsg = "";
   successdiv = false;
   successmsg = "";
+  loading = false;
   ngOnInit() {
     if (localStorage.getItem("username")) {
       this.router.navigateByUrl("/tasklist");
@@ -51,6 +52,9 @@ export class SignupComponent implements OnInit {
       }
     });
     this.store.pipe(select(AppStore.getError)).subscribe((error) => {});
+    this.store.pipe(select(AppStore.getLoadingState)).subscribe((loading) => {
+      this.loading = loading;
+    });
   }
   onSubmit() {
     if (this.signupform.valid) {
